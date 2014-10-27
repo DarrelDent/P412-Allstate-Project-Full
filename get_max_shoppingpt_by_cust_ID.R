@@ -1,0 +1,1 @@
+max.shopping_pt <- aggregate(shopping_pt ~ customer_ID, data=edited.df.shoppingpt, max)

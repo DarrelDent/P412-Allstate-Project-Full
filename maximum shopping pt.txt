@@ -1,0 +1,11 @@
+aggregate(data$shopping_PT~data$customer_ID, data=df, max)
+where 'data' = your name for the dataset in R
+
+then -
+
+merge(aggregate(data$shopping_PT~data$customer_ID, data=df, max),df,all.x=T)
+
+Darrel Dent: Okay.  I looked at the aggregate function, but I couldn't figure out a way to apply it.  What does the all.x=T function in the merge do?
+
+Travis: keeps the other columns with data relevant to the max point
+Travis: so all the other data gets kept and brought along. otherwise you only get the output of the cust ID and the max shopping PT

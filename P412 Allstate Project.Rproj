@@ -1,13 +1,433 @@
-Version: 1.0
-
-RestoreWorkspace: Default
-SaveWorkspace: Default
-AlwaysSaveHistory: Default
-
-EnableCodeIndexing: Yes
-UseSpacesForTab: Yes
-NumSpacesForTab: 2
-Encoding: UTF-8
-
-RnwWeave: knitr
-LaTeX: pdfLaTeX
+install.packages("RWeka")
+install.packages("C:/Users/Office1/AppData/Local/Temp/RtmpiYGCEq/downloaded_packages/RWeka_0.4-23.zip", repos = NULL)
+load("C:/Users/Office1/R Working Directory/P412 Allstate Project/test_v2.csv")
+test_v2 <- read.csv("C:/Users/Office1/R Working Directory/P412 Allstate Project/test_v2.csv")
+View(test_v2)
+train <- read.csv("C:/Users/Office1/R Working Directory/P412 Allstate Project/train.csv")
+View(train)
+library(Hmisc)
+hist(train)
+names(train)
+str(train)
+train.matrix <- data.matrix(train, rownames.force = NA)
+hist(train.matrix)
+cor(train.matrix)
+corrgram(train.matrix)
+library(corrgram)
+corrgram(train.matrix)
+variable.names <- names(train)
+head(train)
+length(train$customer_ID)
+length(train$shopping_pt)
+length(train$record_type)
+??length
+hist(train.matrix)
+sum(is.na(train$risk_factor))
+sum(is.na(train$time))
+sum(is.na(train$state))
+sum(is.na(train$homeowner))
+sum(is.na(train$car_value))
+sum(is.na(train$married_couple))
+sum(is.na(train$B))
+sum(is.na(train$E))
+hist(train.matrix)
+hist(train)
+hist(test)
+test <- test_v2
+hist(test)
+length(test$record_type)
+sum(is.na(test$record_type))
+sum(is.na(test$time))
+sum(is.na(test$state))
+sum(is.na(test$homeowner))
+sum(is.na(test$car_value))
+sum(is.na(test$married_couple))
+sum(is.na(test$B))
+sum(is.na(test$E))
+str(test$risk_factor)
+hist(test$risk_factor)
+hist(train$risk_factor)
+??wine
+corrgram(train.matrix)
+save.image("C:/Users/Office1/R Working Directory/P412 Allstate Project/P412 Allstate Project.Rproj.RData")
+risk <- train$risk_factor
+train.norisk <- cbind(train$shopping_pt, train$record_type, train$day, train$time, train$state, train$location, train$group_size, train$homeowner, train$car_age, train$car_value, train$age_oldest, train$age_youngest, train$married_couple, train$C_previous, train$duration_previous, train$A, train$B, train$C, train$D, train$E, train$F, train$G, train$cost)
+cor(risk, train.norisk)
+cor(test)
+cor(train.matrix)
+test.nomissing <- test[complete.cases(test)]
+?dfx
+??dfx
+test.nomissing <- test[complete.cases(test),]
+test.nomissing.matrix <- data.matrix(test.nomissing, rownames.force = NA)
+cor(test.nomissing.matrix)
+summary(risk.modeltest <- lm(test.nomissing$risk_factor ~ test.nomissing$shopping_pt + test.nomissing$day + test.nomissing$time + test.nomissing$state + test.nomissing$location + test.nomissing$group_size + test.nomissing$homeowner + test.nomissing$car_age + test.nomissing$car_value + test.nomissing$age_oldest + test.nomissing$age_youngest + test.nomissing$married_couple + test.nomissing$C_previous + test.nomissing$duration_previous))
+summary(risk.modeltest <- lm(test.nomissing$risk_factor ~ test.nomissing$shopping_pt + test.nomissing$day + test.nomissing$location + test.nomissing$group_size + test.nomissing$homeowner + test.nomissing$car_age + test.nomissing$car_value + test.nomissing$age_oldest + test.nomissing$age_youngest + test.nomissing$married_couple + test.nomissing$C_previous + test.nomissing$duration_previous))
+summary(risk.modeltest <- lm(test.nomissing$risk_factor ~ test.nomissing$day + test.nomissing$location + test.nomissing$group_size + test.nomissing$homeowner + test.nomissing$car_age + test.nomissing$car_value + test.nomissing$age_oldest + test.nomissing$age_youngest + test.nomissing$married_couple + test.nomissing$C_previous + test.nomissing$duration_previous))
+summary(risk.modeltest <- lm(test.nomissing$risk_factor ~ test.nomissing$day + test.nomissing$location + test.nomissing$group_size + test.nomissing$homeowner + test.nomissing$car_age + test.nomissing$car_value + test.nomissing$age_oldest + test.nomissing$age_youngest + test.nomissing$married_couple + test.nomissing$C_previous))
+summary(risk.modeltest <- lm(test.nomissing$risk_factor ~ test.nomissing$location + test.nomissing$group_size + test.nomissing$homeowner + test.nomissing$car_age + test.nomissing$car_value + test.nomissing$age_oldest + test.nomissing$age_youngest + test.nomissing$married_couple + test.nomissing$C_previous))
+hist(test.nomissing$car_value)
+?count
+??count
+save.image("C:/Users/Office1/R Working Directory/P412 Allstate Project/P412 Allstate Project.Rproj.RData")
+head(train, n=100)
+train.head <- head(train, n=100)
+view(train.head)
+View(train.head)
+train2a <- train[train$record_type == 1, ]
+train2b <- train[train$record_type != 1, ]
+ind <- train$record_type == 1 & c(0, diff(train$customer_ID) == 0)
+ind <- c(ind[2:length(ind)], FALSE)
+train2c <- train[ind, ]
+view(train2c)
+View(train2c)
+save.image("C:/Users/Office1/R Working Directory/P412 Allstate Project/P412 Allstate Project.Rproj.RData")
+train.stripped <- train[18:24]
+View(train.stripped)
+save.image("C:/Users/Office1/R Working Directory/P412 Allstate Project/P412 Allstate Project.Rproj.RData")
+?collapse
+??collapse
+coverage.options <- collapse(c(train.stripped$A, train.stripped$B, train.stripped$C, train.stripped$D, train.stripped$E, train.stripped$F, train.stripped$G))
+save.image("C:/Users/Office1/R Working Directory/P412 Allstate Project/P412 Allstate Project.Rproj.RData")
+?as.character()
+as.character(train.stripped$A)
+as.character(train.stripped$A[1:10])
+as.character(train.stripped$A[1:15])
+train.stripped.options <- c(train.stripped, as.character(train.stripped$A), as.character(train.stripped$B))
+rm(train.stripped.options)
+train.stripped.options["Options"] <- NA
+train.stripped2 <- train.stripped
+train.stripped2["Options"] <- NA
+train.stripped2$Options <- c(as.character(train.stripped2$A), as.character(train.stripped2$B), as.character(train.stripped2$C), as.character(train.stripped2$D), as.character(train.stripped2$E), as.character(train.stripped2$F), as.character(train.stripped2$G))
+?by.row
+??by.row
+view(train.stripped2)
+View(train.stripped2)
+?aggregate
+train.stripped2 <- as.character(trainstripped2[1:7])
+train.stripped2 <- as.character(train.stripped2[1:7])
+train.stripped2 <- train.stripped
+train.stripped2 <- as.dataframe(as.character(train.stripped2[1:7]))
+??as.dataframe
+train.stripped2 <- data.frame(as.character(train.stripped2[1:7]))
+View(train.stripped2)
+train.stripped2 <- train.stripped
+train.stripped2$A <- as.character(train.stripped$A)
+View(train.stripped2)
+str(train.stripped2)
+train.stripped2$B <- as.character(train.stripped$B)
+train.stripped2$C <- as.character(train.stripped$C)
+train.stripped2$D <- as.character(train.stripped$D)
+train.stripped2$E <- as.character(train.stripped$E)
+train.stripped2$F <- as.character(train.stripped$F)
+train.stripped2$G <- as.character(train.stripped$G)
+str(train.stripped2)
+?paste
+train.stripped3 <- train.stripped
+train.stripped3$Options <- paste(train.stripped3$A, train.stripped$B, train.stripped$C, train.stripped$D, train.stripped$E, train.stripped$F, train.stripped$G, sep="")
+View(train.stripped3)
+train.stripped4 <- train.stripped
+train.stripped4$Options <- paste(train.stripped4$[1:7], sep="")
+train.stripped4$Options <- paste(train.stripped4$[1:7], sep="")
+rm(train.stripped2, train.stripped4)
+train.plus.options <- train
+train.plus.options$Options <- paste(train$A, train$B, train$C, train$D, train$E, train$F, train$G)
+str(train.plus.options)
+View(head(train.plus.options[1:25]))
+?head
+View(head(train.plus.options, 25))
+rm(train.plus.options)
+train.plus.options$Options <- paste(train$A, train$B, train$C, train$D, train$E, train$F, train$G, sep = "")
+train.plus.options <- train
+train.plus.options$Options <- paste(train$A, train$B, train$C, train$D, train$E, train$F, train$G, sep = "")
+View(head(train.plus.options, 25))
+save.image("C:/Users/Office1/R Working Directory/P412 Allstate Project/P412 Allstate Project.Rproj.RData")
+rm(train.stripped, train.stripped3)
+save.image("C:/Users/Office1/R Working Directory/P412 Allstate Project/P412 Allstate Project.Rproj.RData")
+save.image("C:/Users/Office1/R Working Directory/P412 Allstate Project/P412 Allstate Project.Rproj.RData")
+save.image("C:/Users/Office1/R Working Directory/P412 Allstate Project/P412 Allstate Project.Rproj.RData")
+?row.num
+??row.num
+nrow(train.plus.options)
+train.plus.options.indexed <- train.plus.options
+?index
+index <- (1:nrows(train.plus.options))
+index <- (1:nrow(train.plus.options))
+train.plus.options.indexed <- c(train.plus.options.indexed, index)
+head(train.plus.options.indexed)
+head(train.plus.options.indexed, n=25)
+?head
+head(train.plus.options.indexed, n=25)
+View(head(train.plus.options.indexed, n=25))
+str(train.plus.options.indexed)
+train.plus.options.indexed <- train.plus.options
+View(head(index, n=25))
+train.plus.options.indexed["Index"] <- NA
+train.plus.options.indexed$Index <- (1:nrow(train.plus.options.indexed))
+str(train.plus.options.indexed)
+head(train.plus.options.indexed, n=25)
+View(head(train.plus.options.indexed, n=25)
+)
+?sort
+sorting.test <- train.plus.options.indexed[order(customer_ID, -shopping_pt, record_type)]
+?order
+attach(train.plus.options.indexed)
+sorting.test <- train.plus.options.indexed[order(customer_ID, -shopping_pt, record_type)]
+?f
+?F
+save.image("C:/Users/Office1/R Working Directory/P412 Allstate Project/P412 Allstate Project.Rproj.RData")
+?rename
+??rename
+library(plyr)
+?rename
+train.plus.options.indexed2 <- train.plus.options.indexed
+rename(train.plus.options.indexed2, c("A"="1", "B"="2", "C"="3", "D"="4", "E"="5", "F"="6", "G"="7"))
+View(head(train.plus.options.indexed2, n=25))
+train.plus.options.indexed2 <- train.plus.options.indexed
+colname(train.plus.options.indexed)
+?colname
+??colname
+?rownames
+colnames(train.plus.options.indexed)
+names(train.plus.options.indexed)[18:24]
+names(train.plus.options.indexed2)[18:24] <- paste([1:7], names(train.plus.options.indexed)[18:24])
+names(train.plus.options.indexed2)[18:24]
+?paste
+?replace
+replace(names(train.plus.options.indexed2), c("A","B","C","D","E","F","G"), c("1","2","3","4","5","6","7"))
+names(train.plus.options.indexed2)
+train.plus.options.indexed3 <- replace(names(train.plus.options.indexed2), c("A","B","C","D","E","F","G"), c("1","2","3","4","5","6","7"))
+names(train.plus.options.indexed3)
+rm(train.plus.options.indexed3)
+names(train.plus.options.indexed2)[names(train.plus.options.indexed2)=="A"] <- "1"
+names(train.plus.options.indexed2)
+names(train.plus.options.indexed2)[names(train.plus.options.indexed2)=="B"] <- "2"
+names(train.plus.options.indexed2)[names(train.plus.options.indexed2)=="C"] <- "3"
+names(train.plus.options.indexed2)[names(train.plus.options.indexed2)=="D"] <- "4"
+names(train.plus.options.indexed2)[names(train.plus.options.indexed2)=="E"] <- "5"
+names(train.plus.options.indexed2)[names(train.plus.options.indexed2)=="F"] <- "6"
+names(train.plus.options.indexed2)[names(train.plus.options.indexed2)=="G"] <- "7"
+View(head(train.plus.options.indexed2), n=10)
+names(train.plus.options.indexed2)
+View(head(train.plus.options.indexed2, n=10)
+)
+tpo.indexed.ren.var <- train.plus.options.indexed2
+save.image("C:/Users/Office1/R Working Directory/P412 Allstate Project/P412 Allstate Project.Rproj.RData")
+sorting.test <- tpo.indexed.ren.var[order(customer_ID, -shopping_pt, record_type)]
+names(tpo.indexed.ran.var)
+names(tpo.indexed.ren.var)
+sorting.test <- tpo.indexed.ren.var[order("customer_ID", -"shopping_pt", "record_type")]
+sorting.test <- tpo.indexed.ren.var[order(customer_ID, -shopping_pt, record_type)]
+sorting.test <- tpo.indexed.ren.var[order(customer_ID, -shopping_pt, record_type)]
+attach(tpo.indexed.ren.var)
+sorting.test <- tpo.indexed.ren.var[order(customer_ID, -shopping_pt, record_type)]
+detach(tpo.indexed.ren.var)
+sorting.test <- tpo.indexed.ren.var[order(tpo.indexed.ren.var$customer_ID, -shopping_pt, record_type)]
+sorting.test <- tpo.indexed.ren.var[order(tpo.indexed.ren.var$customer_ID, -tpo.indexed.ren.var$shopping_pt, tpo.indexed.ren.var$record_type)]
+head(tpo.indexed.ren.var$customer_ID, n=10)
+str(tpo.indexed.ren.var$customer_ID)
+train.plus.options.indexed$customer_ID == tpo.indexed.ren.var$customer_ID
+tpo.indexed.ren.var2 <- tpo.indexed.ren.var
+View(head(tpo.indexed.ren.var2, n-10))
+View(head(tpo.indexed.ren.var2, n=10))
+tpo.indexed.ren.var2$customer_ID <- train.plus.options.indexed$customer_ID
+View(head(tpo.indexed.ren.var2, n=10))
+tpo.indexed.ren.var2$customer_ID[tpo.indexed.ren.var2$Index <= 10]
+tpo.indexed.ren.var2$customer_ID[tpo.indexed.ren.var2$Index <= 20]
+tpo.indexed.ren.var$customer_ID[tpo.indexed.ren.var$Index <= 20]
+rm(tpo.indexed.ren.var2)
+hist(tpo.indexed.ran$shopping_pt)
+hist(tpo.indexed.ren.var$shopping_pt)
+tpoindexed.numopt <- tpo.indexed.ren.var
+hist(tpo.indexed.ren.var$Options)
+hist(tpo.indexed.ren.var$as.numeric(Options))
+?as.numeric
+hist(as.numeric(tpo.indexed.ren.var$Options))
+View(head(tpoindexed.numopt), n=10)
+View(head(tpoindexed.numopt, n=10)
+)
+View(head(tpoindexed.numopt$customer_ID, n=10))
+tpoindexed.numopt.by.custID <- tpoindexed.numopt
+?sort
+tpoindexed.numopt.by.custID <- sort(tpoindexed.numopt$customer_ID, decreasing = FALSE)
+tpoindexed.numopt.sort1 <- tpoindexed.numopt.by.custID
+rm(tpoindexed.numopt.by.custID)
+View(head(tpoindexed.numopt.sort1, n=10))
+save.image("C:/Users/Office1/R Working Directory/P412 Allstate Project/P412 Allstate Project.Rproj.RData")
+detach()
+View(head(tpoindexed.numopt, n=10))
+tpoindexed.numopt.sort1 <- tpoindexed.numopt
+max.shopping_pt <- max(tpoindexed.numopt$shopping_pt)
+max.shopping_pt
+?by
+max.shopping_pt <- by(tpoindexed.numopt, unique(customer_ID), max(shopping_pt))
+max.shopping_pt <- by(tpoindexed.numopt, unique(tpoindexed.numopt$customer_ID), max(shopping_pt))
+max.shopping_pt <- by(tpoindexed.numopt, customer_ID, max(shopping_pt))
+max.shopping_pt <- by(tpoindexed.numopt, tpoindexed.numopt$customer_ID, max(shopping_pt))
+max.shopping_pt <- by(tpoindexed.numopt, tpoindexed.numopt$customer_ID, max(tpoindexed.numopt$shopping_pt))
+?max
+max(tpoindexed,numopt$shopping_pt)
+max(tpoindexed.numopt$shopping_pt)
+tpoindexed.numopt.factorized <- topindexed.numopt
+tpoindexed.numopt.factorized <- tpoindexed.numopt
+View(as.factor(tpoindexed.numopt.factorized$customer_ID))
+str(topindexed.numopt.factorized$customer_ID)
+str(tpoindexed.numopt.factorized$customer_ID)
+factorized.custID <- as.factor(tpoindexed.numopt.factorized$customer_ID)
+str(factorized.custID)
+rm(factorized.custID)
+tpoindexed.numopt.factorized$customer_ID <- as.factor(tpoindexed.numopt.factorized$customer_ID)
+str(tpoindexed.numopt.factorized)
+?by
+max.shopping_pt <- by(tpoindexed.numopt.factorized, customer_ID, max(shopping_pt))
+max.shopping_pt <- by(tpoindexed.numopt.factorized, tpoindexed.numopt.factorized$customer_ID, max(tpoindexed.numopt.factorized$shopping_pt))
+max.shopping_pt <- by(tpoindexed.numopt.factorized, tpoindexed.numopt.factorized$customer_ID, summary)
+max.shopping_pt <- by(tpoindexed.numopt.factorized, tpoindexed.numopt.factorized$customer_ID, max)
+edited.df <- tpoindexed.numopt.factorized[1:3, 26:27]
+str(edited.df)
+edited.df <- tpoindexed.numopt.factorized[,1:3, 26:27]
+str(edited.df)
+edited.df <- tpoindexed.numopt.factorized[,1:3 + 26:27]
+edited.df <- tpoindexed.numopt.factorized[,c(1,2,3,26,27)]
+str(edited.df)
+?subset
+edited.df.purchase <- edited.df[record_type == 1]
+edited.df.purchase <- edited.df[edited.df$record_type == 1]
+edited.df.purchase <- edited.df[,edited.df$record_type == 1]
+edited.df.purchase <- edited.df[edited.df$record_type == 1,]
+View(head(edited.df.purchase, n=100))
+?test
+??test
+?interaction
+?where
+??where
+View(head(edited.df, n=25))
+edited.df[edited.df$shopping_pt > 9,]
+?apply
+?table
+?out
+edited.df.shoppingpt <- edited.df[, c(1,2,5)]
+View(head(edited.df.shoppingpt, n=25))
+max.shopping_pt <- by(edited.df.shoppingpt, edited.df.shoppingpt$customer_ID, table(max(edited.df.shoppingpt$shopping_pt, edited.df.shoppingpt$Index))
+)
+str(edited.df.shoppingpt)
+save.image("C:/Users/Office1/R Working Directory/P412 Allstate Project/P412 Allstate Project.Rproj.RData")
+?factanal
+aggregate(edited.df.shoppingpt$shopping_PT ~ edited.df.shoppingpt$customer_ID, data=edited.df.shoppingpt, max)
+aggregate(edited.df.shoppingpt$shopping_pt ~ edited.df.shoppingpt$customer_ID, data=edited.df.shoppingpt, max)
+merge(aggregate(edited.df.shoppingpt$shopping_pt ~ edited.df.shoppingpt$customer_ID, data=edited.df.shoppingpt, max),edited.df.shoppingpt,all.x=T)
+aggregated.max.shoppingpt <- aggregate(edited.df.shoppingpt$shopping_pt ~ edited.df.shoppingpt$customer_ID, data=edited.df.shoppingpt, max)
+View(head(aggregated.max.shoppingpt, n=50))
+max.shopping_pt <- aggregated.max.shoppingpt
+rm(aggregated.max.shoppingpt)
+View(head(max.shopping_pt, n=100))
+aggregated.max.shoppingpt <- aggregate(shopping_pt ~ customer_ID, data=edited.df.shoppingpt, max)
+View(head(aggregated.max.shoppingpt, n=10))
+max.shopping_pt <- aggregated.max.shoppingpt
+View(head(max.shopping_pt, n=10))
+rm(aggregated.max.shoppingpt)
+max.shopping_pt.index <- edited.df$Index[edited.df$customer_ID == max.shopping_pt$customer_ID]
+View(max.shopping_pt.index)
+rm(max.shopping_pt.index)
+dim(max.shopping_pt)
+dim(edited.df.purchase)
+View(head(edited.df, n=100))
+?apply
+edited.df.max_pt <- edited.df[(edited.df$customer_ID == max.shopping_pt$customer_ID) & (edited.df$shopping_pt == max.shopping_pt$shopping_pt)]
+len(edited.df$shopping_pt)
+?length
+length(edited.df$shopping_pt)
+length(max.shopping_pt$shopping_pt)
+?iif
+??iif
+?cumsum
+running.total <- cumsum(max.shopping_pt$shopping_pt)
+View(head(running.total, n=25))
+max.shopping_pt["Index"] <- cumsum(max.shopping_pt$shopping_pt)
+View(head(max.shopping_pt, n=25))
+View(head(edited.df, n=250))
+names(max.shopping_pt)[names(max.shopping_pt)=="Index"] <- "spIndex"
+View(head(max.shopping_pt, n=25))
+names(edited.df.purchase)[names(edited.df.purchase)=="Index"] <- "ppIndex"
+View(head(edited.df.purchase, n=250))
+length(max.shopping_pt)
+dim(max.shopping_pt)
+dim(edited.df.purchase)
+?merge
+customer.chron <- merge(edited.df.purchase, max.shopping_pt, by = "customer_ID")
+View(head(customer.chron, n=100))
+edited.df.purchase.copy <- edited.df.purchase
+edited.df.purchase <- edited.df.purchase[-"shopping_pt"]
+edited.df.purchase <- edited.df.purchase[-shopping_pt]
+edited.df.purchase <- edited.df.purchase[-edited.df.purchase$shopping_pt]
+View(head(edited.df.purchase, n=10))
+edited.df.purchase <- edited.df.purchase.copy
+View(head(edited.df.purchase, n=10))
+edited.df.purchase <- edited.df.purchase[c(1,3,4,5)]
+View(head(edited.df.purchase, n=10))
+customer.chron <- merge(edited.df.purchase, max.shopping_pt, by = "customer_ID")
+View(head(customer.chron, n=100))
+names(edited.df.purchase)[names(edited.df.purchase)=="Options"] <- "ppOptions"
+View(head(edited.df.purchase, n=10))
+customer.chron <- merge(edited.df.purchase, max.shopping_pt, by = "customer_ID")
+View(head(customer.chron, n=100))
+rm(test)
+rm(test.nomissing)
+rm(test.nomissing.matrix)
+rm(test_v2)
+?copy
+spOptions <- edited.df$Options[edited.df$Index == max.shopping_pt$spIndex]
+?grep
+nrows(edited.df)
+?nrows
+??nrows
+?match
+match(max.shopping_pt$spIndex, edited.df$Index, nomatch = NA_integer_, incomparables = NULL)
+spIndex <- edited.df$Options[edited.df$Index == max.shopping_pt$spIndex]
+matched.indexes <- match(max.shopping_pt$spIndex, edited.df$Index, nomatch = NA_integer_, incomparables = NULL)
+View(head(matched.indexes, n=100))
+dim(matched.indexes)
+length(matched.indexes)
+length(max.shopping_pt)
+dim(max.shopping_pt)
+?melt
+??melt
+?dlply
+??dlply
+?each
+??each
+View(customer.chron)
+View(train)
+View(train.matrix)
+View(train.norisk)
+rm(train.norisk)
+View(train.plus.options)
+View(train2a)
+View(edited.df)
+View(edited.df.max_pt)
+rm(edited.df.max_pt)
+View(train.plus.options.indexed)
+View(train.plus.options.indexed2)
+rm(train.plus.options.indexed2)
+View(tpoindexed.numopt)
+View(tpoindexed.numopt.sort1)
+View(train.head)
+rm(train.head)
+rm(train.matrix)
+View(train2a)
+View(train2b)
+View(train2c)
+View(head(train$A, n=10))
+View(head(train$A, n=25))
+View(head(train$B, n=25))
+View(head(train$C, n=25))
+View(head(train$D, n=25))
+View(head(train$E, n=25))
+View(head(train$F, n=25))
+View(head(train$G, n=25))
+View(head(index, n=10))
+rm(index)
+View(train.plus.options.indexed)
+rm(tpoindexed.numopt.sort1)
+str(tpoindexed.numopt.factorized)
+savehistory("C:/Users/Office1/R Working Directory/P412 Allstate Project/P412 Allstate Project.Rproj")
